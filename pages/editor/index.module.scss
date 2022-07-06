@@ -1,0 +1,18 @@
+.container {
+  margin: 0 auto;
+  .operation {
+    display: flex;
+    padding: 10px 10px 20px;
+    .title {
+      width: 80%;
+      // flex-shrink: 0;
+    }
+    .tag {
+      width: 25%;
+    }
+    .button {
+      
+      flex-shrink: 1;
+    }
+  }
+}
