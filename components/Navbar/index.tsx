@@ -10,8 +10,8 @@ import { useStore } from 'store';
 import { LogoutOutlined, HomeOutlined } from '@ant-design/icons';
 import request from 'service/fetch';
 import { observer } from 'mobx-react-lite';
+import Login from 'components/login';
 const NavBar: NextPage = () => {
-  console.log('navbarrrrr')
   const store = useStore();
   // console.log(store);
   const { pathname, push } = useRouter();
@@ -93,7 +93,7 @@ const NavBar: NextPage = () => {
           </Button>
         )}
       </section>
-      {/* <Login isShow={isShowLogin} onClose={handleClose} /> */}
+      <Login isShow={isShowLogin} onClose={handleClose} />
     </div>
   );
 };
