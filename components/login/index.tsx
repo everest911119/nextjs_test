@@ -68,7 +68,7 @@ const Login = ((props: IProps) => {
   };
   const handleOAuthGithub = () => {
     cookie.set('redirect', router?.asPath);
-    const redirectURI = `http://localhost:3000/api/oauth/redirect`;
+    const redirectURI = process.env.NEXT_PUBLIC_REDIRECT
     console.log(`${Config.OAUTH_URL}&redirect_uri=${redirectURI}`);
     window.location.replace(`${Config.OAUTH_URL}&redirect_uri=${redirectURI}`);
   };
