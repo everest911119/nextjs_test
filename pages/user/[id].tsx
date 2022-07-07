@@ -1,7 +1,7 @@
 import { Avatar, Button, Divider } from 'antd';
 import { prepareConnection } from 'db';
 import { Articles, Users } from 'db/entity';
-import type { GetServerSideProps, NextPage } from 'next';
+import type {  GetStaticProps, NextPage } from 'next';
 import { IArticle, Itags, userInfo } from 'pages/api';
 import styles from './index.module.scss';
 import {
@@ -69,7 +69,37 @@ const UserPage: NextPage = (props: IProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//   const userId = params?.id;
+//   const db = await prepareConnection();
+//   const userRepo = db.getRepository(Users);
+//   const user = await userRepo.findOne({
+//     where: {
+//       id: Number(userId),
+//     },
+//   });
+//   const articleRepo = db.getRepository(Articles);
+//   const article = await articleRepo
+//     .createQueryBuilder('article')
+//     .leftJoinAndMapOne(
+//       'article.user',
+//       Users,
+//       'users',
+//       'article.user_id=users.id'
+//     )
+//     .leftJoinAndSelect('article.tags', 'tags')
+//     .where('users.id =:userId', { userId })
+//     .getMany();
+
+//   return {
+//     props: {
+//       userInfo: JSON.parse(JSON.stringify(user)),
+//       articles: JSON.parse(JSON.stringify(article)),
+//     },
+//   };
+// };
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const userId = params?.id;
   const db = await prepareConnection();
   const userRepo = db.getRepository(Users);
