@@ -1,7 +1,7 @@
 import { Avatar, Button, Divider } from 'antd';
 import { prepareConnection } from 'db';
 import { Articles, Users } from 'db/entity';
-import type {  GetStaticProps, NextPage } from 'next';
+import type {  GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { IArticle, Itags, userInfo } from 'pages/api';
 import styles from './index.module.scss';
 import {
@@ -98,6 +98,19 @@ const UserPage: NextPage = (props: IProps) => {
 //     },
 //   };
 // };
+
+export const getStaticPaths:GetStaticPaths = async () =>{
+  // user/[id]
+  const db = await prepareConnection()
+  const users = await db.getRepository(Users).find()
+  const userIds = users.map((user)=>({params:{id:String(user?.id)}}))
+  // 需要返回
+  // [{params:1},{params:2},{params:3}]
+  return {
+    paths:userIds,
+    fallback: 'blocking'
+  }
+} 
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const userId = params?.id;
